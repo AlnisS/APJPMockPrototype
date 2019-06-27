@@ -1,3 +1,50 @@
+int smx;
+int smy;
+
+void mousePressed() {
+  smx = mouseX;
+  smy = mouseY;  
+}
+
+void mouseReleased() {
+  
+}
+
+interface Call {
+  void call();
+}
+
+class Button {
+  int x;
+  int y;
+  int w;
+  int h;
+  String text;
+  Call call;
+  PGraphics buffer;
+  Button(int x, int y, int w, int h, String text, Call call) {
+    this.x = x;
+    this.y = y;
+    this.w = w;
+    this.h = h;
+    this.text = text;
+    this.call = call;
+    buffer = createGraphics(w - 2, h - 2);
+    buffer.beginDraw();
+    buffer.textFont(createFont("Ubuntu Mono", 12));
+    buffer.endDraw();
+  }
+  void render() {
+    buffer.beginDraw();
+    buffer.background(0);
+    buffer.text(text, 5, 12);
+    buffer.endDraw();
+  }
+  PGraphics getBuffer() {
+    return buffer;
+  }
+}
+
 void toggleRecording(AudioRecorder recorder) {
   if (recorder.isRecording())
     recorder.endRecord();
